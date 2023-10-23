@@ -1,0 +1,41 @@
+.inputBox_container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  max-width: 14em;
+  width: fit-content;
+  height: fit-content;
+  background-color: #5c6370;
+  border-radius: 0.8em;
+  overflow: hidden;
+}
+
+.search_icon {
+  height: 1em;
+  padding: 0 0.5em 0 0.8em;
+  fill: #abb2bf;
+}
+
+.inputBox {
+  background-color: transparent;
+  color: black;
+  outline: none;
+  width: 100%;
+  border: 0;
+  padding: 0.5em 1.5em 0.5em 0;
+  font-size: 1em;
+}
+
+::placeholder {
+  color: #abb2bf;
+}
+.card {
+  width: 190px;
+  height: 254px;
+  border-radius: 30px;
+  background: #212121;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(60, 60, 60);
+}
+body{
+    background: #212121; 
+}
