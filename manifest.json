@@ -1,24 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "My Extension",
-    "version": "1.0",
-    "description": "My extension description",
-    "permissions": [
-      "activeTab",
-      "storage",
-      "webRequest",
-      "tabs"
-    ],
-    "background": {
-      "service_worker": "extension/background.js"
-    },
-    "action": {
-      "default_popup": "extension/popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["extension/content.js"]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "1.0",
+  "description": "My extension description",
+  "icons": {
+    "16": "./images/16.png",
+    "32": "./images/32.png",
+    "48": "./images/48.png",
+    "128": "./images/128.png"
+  },
+  "permissions": ["activeTab", "storage", "webRequest", "tabs"],
+  "background": {
+    "service_worker": "extension/background.js"
+  },
+  "action": {
+    "default_popup": "extension/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["extension/content.js"]
+    }
+  ]
+}

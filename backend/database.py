@@ -27,21 +27,3 @@ class Mongo:
         documents=self.blacklisted_contracts.find({})
         return documents
   
-
-    # def define_schemas(self):
-    #     self.blacklisted_contract_schema = Schema({
-    #         "address": str,
-    #         "User": str,
-    #         "reason": str
-    #     })
-
-    #     self.whitelisted_contract_schema = Schema({
-    #         "address": str,
-    #         "User": str,
-    #         "reason": str
-    #     })
-
-    #     self.blacklisted_user_schema = Schema({
-    #         "username": str,
-    #         "reason": str
-    #     })
