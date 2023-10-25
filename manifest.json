@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "My Extension",
+  "name": "GreSec",
   "version": "1.0",
-  "description": "My extension description",
+  "description": "GreSec is a browser extension that helps you to secure your browser by detecting malicious contracts",
   "icons": {
     "16": "./images/16.png",
     "32": "./images/32.png",

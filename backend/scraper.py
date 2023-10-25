@@ -1,8 +1,11 @@
+#fix the bug of the scraper when it returns only one tag
+
 import requests
 from bs4 import BeautifulSoup
 
 
 def Main(url):
+    tottags = ["Heist", "Exploit"]
     with requests.Session() as req:
         # r = req.get(url, headers={'User-Agent': 'Ahmed American :)'})
         # soup = BeautifulSoup(r.content, 'html.parser')
@@ -17,16 +20,16 @@ def Main(url):
         #     'ctl00$ContentPlaceHolder1$btnSubmit': "Verify"
         # }
         r = req.post(
-            "https://etherscan.io/address/0x098b716b8aaf21512996dc57eb0615e2383e2f96", headers={'User-Agent': 'Akash Greninja :)'})
-        soup = BeautifulSoup(r.content, 'html.parser')
+            f"https://etherscan.io/address/{url}",
+            headers={"User-Agent": "Akash Greninja :)"},
+        )
+        soup = BeautifulSoup(r.content, "html.parser")
         print(soup)
         tags = soup.find_all("span", class_="hash-tag text-truncate")
-   
+
         # Loop through the tags and print the text content
         for tag in tags:
-            if tag.text == "Exploit":
-                print(tag.text)
-   
+            if tag.text in tottags:
+                return tag.text
 
 
-Main("https://etherscan.io/proxyContractChecker")

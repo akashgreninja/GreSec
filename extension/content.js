@@ -1,7 +1,7 @@
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", GetInitialAddress);
 } else {
-  afterDOMLoaded();
+  GetInitialAddress();
 }
 
 function GetInitialAddress() {
@@ -21,24 +21,29 @@ function GetInitialAddress() {
     console.log(`Found ${addresses.length} addresses:`);
     console.log(addresses);
 
-    // Loop through each address and send a request for each one
-    addresses.forEach((address) => {
-      const contract = {
-        address: address,
-      };
-
-      fetch("/bad_contract", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Contract-Address": address,
-        },
-        body: JSON.stringify({}),
+    fetch(`http://127.0.0.1:4001/is_contract_blacklisted/${addresses[0]}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+  
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
       })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
-    });
+      .then((data) => {
+        console.log(data);
+        if (data.message === "Heist" || data.message === "Exploit") {
+          chrome.runtime.sendMessage({ exploitDetected: true });
+        }
+      })
+      .catch((error) => console.error(error));
+
+    // Loop through each address and send a request for each one
+    // addresses.forEach((address) => {
+     
+    // });
   } else {
     console.log("No addresses found.");
   }
