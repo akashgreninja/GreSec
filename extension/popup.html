@@ -9,10 +9,24 @@
     <div class="card">
       <!-- Display content when no exploit is detected -->
       <div id="normalContent">
-        <form id="reportForm">
-          <input type="text" id="contractAddress" placeholder="Enter Contract Address" />
-          <button type="button" id="checkers">Report Fake Contract</button>
-        </form>
+        <div class="form-container">
+          <div class="logo-container">
+            Forgot Password
+          </div>
+    
+          <form class="form">
+            <div class="form-group">
+              <label for="email">Report Contract and prevent scams</label>
+              <!-- <input type="text" id="email" name="email" placeholder="Enter the reason for reporting the contract " required=""> -->
+            </div>
+
+         
+            <button class="form-submit-btn" type="submit">Report Contract</button>
+            <!-- <button class="form-submit-btn" type="submit">Send Email</button> -->
+          </form>
+    
+   
+        </div>
       </div>
 
       <!-- Display content when an exploit is detected -->
@@ -22,5 +36,7 @@
       </div>
     </div>
     <script src="./popup.js"></script>
+    <script src="iframe.js"></script>
+<script src="third-party/web3.min.js"></script>
   </body>
 </html>

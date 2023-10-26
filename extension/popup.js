@@ -40,8 +40,17 @@ function  Check(){
 
 
 
-const checkersButton = document.getElementById('checkers');  
+// const checkersButton = document.getElementById('checkers');  
   
-  checkersButton.addEventListener('click', function (e) {  
-    e.preventDefault();  
-    console.log('Button clicked!');  });
+//   checkersButton.addEventListener('click', function (e) {  
+//     e.preventDefault();  
+//     console.log('Button clicked!');  });
+
+
+
+const verifyWalletBtn = document.querySelector('.form-submit-btn');
+verifyWalletBtn.addEventListener("click", () => {
+
+      window.open("http://localhost:3000/", "_blank");
+
+})

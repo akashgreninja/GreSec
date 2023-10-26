@@ -81,6 +81,12 @@ const Navbar = () => {
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
               href="#"
             >
+              Report a Contract
+            </a>
+            <a
+              class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+              href="#"
+            >
               Audit your Contract?
             </a>
 

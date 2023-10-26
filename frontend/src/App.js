@@ -7,13 +7,14 @@ import {
   Route,
  
 } from "react-router-dom";
+import ReportContract from "./components/ReportContract/ReportContract";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        {/* <Route path="Audit" element={<Users />}></Route> */}
+        <Route path="/ReportContract" element={<ReportContract/>}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import Mongo
-# from pydantic import BaseModel
+
+from pydantic import BaseModel
 from scraper import Main
 
 app = FastAPI()
@@ -15,10 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# class BlacklistedContract(BaseModel):
-#     address: str
-#     User: str
-#     reason: str
+
+class BlacklistedContract(BaseModel):
+    ContractAddress: str
+    UserAddress: str
+    reason: str
+    Signature:str
 
 
 mongo = Mongo(
@@ -29,44 +32,47 @@ mongo.connect()
 # mongo.define_schemas()
 
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 
-# @app.post("/blacklisted")
-# async def blacklisted(contract: BlacklistedContract):
-#     mongo.insert(where="blacklisted_contracts", data=contract.dict())
+@app.post("/blacklisted_contracts")
+async def blacklisted(contract: BlacklistedContract):
+    print(contract)
+    mongo.insert(where="blacklisted_contracts", data=contract.dict())
 
-#     return {"message": "Contract blacklisted"}
-
-
-# @app.post("/whitelisted")
-# async def blacklisted(contract: BlacklistedContract):
-#     mongo.insert(where="whitelisted_contracts", data=contract.dict())
-#     return {"message": "Contract blacklisted"}
+    return {"message": "Contract blacklisted"}
 
 
-# @app.post("/blacklisted_users")
-# async def blacklisted(contract):
-#     mongo.insert(where="blacklisted_users", data=contract.dict())
-#     return {"message": "Contract blacklisted"}
+@app.post("/whitelisted")
+async def blacklisted(contract: BlacklistedContract):
+    mongo.insert(where="whitelisted_contracts", data=contract.dict())
+    return {"message": "Contract blacklisted"}
+
+
+@app.post("/blacklisted_users")
+async def blacklisted(contract):
+    mongo.insert(where="blacklisted_users", data=contract.dict())
+    return {"message": "Contract blacklisted"}
 
 
 @app.get("/is_contract_blacklisted/{address}")
 async def is_contract_blacklisted(address: str):
-    state=False
     print("we here ")
     documents = mongo.find()
     for document in documents:
         if document.get("address") == address:
-            tags=["exploit","heist"]
+            tags = ["exploit", "heist"]
             return {"message": tags}
-    
-    getscrapeddata=Main(address)
+
+    getscrapeddata = Main(address)
     if getscrapeddata:
+        data = {"address": address, "reason": getscrapeddata}
+        mongo.insert(where="blacklisted_contracts", data=data)
+
         return {"message": getscrapeddata}
-        
+
     # If the address is not found, return False
     return False
 
