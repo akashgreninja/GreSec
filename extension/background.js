@@ -13,6 +13,12 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     // Set the red icon when an exploit is detected
     chrome.action.setIcon({ path: "../images/warning32.png" });
     chrome.action.setBadgeText({ text: "!" });
+    chrome.runtime.sendMessage({ exploitDetected: true });
+    chrome.storage.local.set({ exploitDetected: true });
+    console.log("done!!")
+
+    
+    console.log("sending")
 
     // Flash the red icon by periodically switching back to the regular icon
     let flashInterval;
@@ -31,7 +37,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       clearInterval(flashInterval);
       chrome.action.setIcon({ path: "../images/128.png" });
       chrome.action.setBadgeText({ text: "" });
-    }, 10000); // Adjust the time as needed
+    }, 50000); // Adjust the time as needed
   }
 });
 

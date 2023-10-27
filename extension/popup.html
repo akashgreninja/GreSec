@@ -3,40 +3,49 @@
   <head>
     <link rel="stylesheet" href="style.css" />
     <title>GreSec</title>
-   
   </head>
   <body>
-    <div class="card">
+    <div class="cards">
       <!-- Display content when no exploit is detected -->
-      <div id="normalContent">
-        <div class="form-container">
-          <div class="logo-container">
-            Forgot Password
-          </div>
-    
-          <form class="form">
-            <div class="form-group">
-              <label for="email">Report Contract and prevent scams</label>
-              <!-- <input type="text" id="email" name="email" placeholder="Enter the reason for reporting the contract " required=""> -->
-            </div>
-
-         
-            <button class="form-submit-btn" type="submit">Report Contract</button>
-            <!-- <button class="form-submit-btn" type="submit">Send Email</button> -->
-          </form>
-    
-   
+      <div class="normalContent" id="normalContent">
+        <div>
+          <img src="../images/greninja.png" alt="" srcset="" height="300px" />
         </div>
+        <center>
+          <div>
+            <h2 class="safe">Welcome to GreSec</h2>
+            <p class="safety">
+              We keep you safe from suspicious contracts Continue browsing as we
+              detect suspicious contracts in the background
+            </p>
+            <button class="form-submit-nil" type="submit">
+              Click here to Visit Gresec
+            </button>
+          </div>
+        </center>
       </div>
 
       <!-- Display content when an exploit is detected -->
-      <div id="exploitContent" style="display: none;">
-        <p>This page has detected a potential exploit or suspicious contract.</p>
-        <p>Please proceed with caution.</p>
+      <div id="exploitContent" style="display: none">
+        <div class="form-container">
+          <div class="logo-container">FRUAD CONTRACT DETECTED</div>
+
+          <form class="form">
+            <div class="form-group">
+              <label for="email">Report Contract and prevent scams</label>
+            </div>
+            <img src="../images/warning.png" alt="" srcset="" />
+
+            <button class="form-submit-btn" type="submit">
+              Report Contract
+            </button>
+            <!-- <button class="form-submit-btn" type="submit">Send Email</button> -->
+          </form>
+        </div>
       </div>
     </div>
     <script src="./popup.js"></script>
     <script src="iframe.js"></script>
-<script src="third-party/web3.min.js"></script>
+    <script src="third-party/web3.min.js"></script>
   </body>
 </html>

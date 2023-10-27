@@ -34,7 +34,8 @@ function GetInitialAddress() {
       })
       .then((data) => {
         console.log(data);
-        if (data.message === "Heist" || data.message === "Exploit") {
+        if (data.message) {
+          console.log("message recievedm ")
           chrome.runtime.sendMessage({ exploitDetected: true });
         }
       })

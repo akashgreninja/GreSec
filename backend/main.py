@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import Mongo
-
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from scraper import Main
+import os
 
+load_dotenv()
 app = FastAPI()
 origins = ["*"]
 
@@ -21,12 +23,11 @@ class BlacklistedContract(BaseModel):
     ContractAddress: str
     UserAddress: str
     reason: str
-    Signature:str
+    Signature: str
 
 
-mongo = Mongo(
-    "mongodb+srv://Akashgreninja:Pokemonprimape%4013@cluster0.o3ihusq.mongodb.net/"
-)
+mongo_uri = os.getenv("MONGO_URI")
+mongo = Mongo(mongo_uri)
 mongo.connect()
 
 # mongo.define_schemas()
@@ -40,7 +41,26 @@ async def root():
 @app.post("/blacklisted_contracts")
 async def blacklisted(contract: BlacklistedContract):
     print(contract)
+
+    # Check if the signature is blacklisted
+    signature = contract.Signature
+    count = mongo.count(where="blacklisted_signatures", query={"signature": signature})
+    if count > 0:
+        return {"message": "Blacklisted"}
+
+    # Insert the contract into the blacklisted_contracts collection
     mongo.insert(where="blacklisted_contracts", data=contract.dict())
+
+    # Check if the user has submitted more than 3 contracts with the same signature
+    user = contract.UserAddress
+    count = mongo.count(
+        where="blacklisted_contracts",
+        query={"Signature": signature, "UserAddress": user},
+    )
+    if count > 3:
+        # Add the user to the blacklisted_users collection
+        mongo.insert(where="blacklisted_users", data={"user": user})
+        return {"message": "User blacklisted"}
 
     return {"message": "Contract blacklisted"}
 

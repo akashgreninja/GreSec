@@ -48,7 +48,7 @@ body{
 }
 
 .form-container {
-  width: 300px;
+  width: 250px;
   background-color: #fff;
   padding: 32px 24px;
   font-size: 14px;
@@ -147,4 +147,14 @@ body{
 
 #email{
   width: 200px;
+}
+
+.safe{
+  
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.safety{
+  color: white;
 }
