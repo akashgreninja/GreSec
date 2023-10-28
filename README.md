@@ -1,5 +1,12 @@
 # GreSec - Blockchain Security Toolkit
 
+## Project Status
+
+**This project is a work in progress.**
+
+We are actively developing and improving this project. While many features are already functional, there is more to come. We welcome contributions and feedback to help us make this project even better.
+
+
 
 <center>
   <img src="https://github.com/akashgreninja/GreSec/assets/84433561/41453536-e2de-4847-948a-7ed60236f938" width="400">
