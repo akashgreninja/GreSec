@@ -69,7 +69,7 @@ const ReportContract = () => {
 
   return (
     <>
-      <Navbar />
+
 
       <div className="h-screen w-screen flex flex-col justify-center items-center">
         <div class="form-container">

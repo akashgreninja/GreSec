@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { GetAllBlacklistedContracts, GetAllWhiteContracts } from "../../Api/reportContract";
+import { GetAllBlacklistedContracts } from "../../Api/reportContract";
 
-const WhiteListedContracts = () => {
+const BlacklistedContracts = () => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ const WhiteListedContracts = () => {
   }, []);
 
   const GetData = async () => {
-    const { data } = await GetAllWhiteContracts();
+    const { data } = await GetAllBlacklistedContracts();
     setdata(data.blacklisted_contracts);
     console.log(data.blacklisted_contracts);
   };
@@ -80,13 +80,7 @@ const WhiteListedContracts = () => {
                           scope="col"
                           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                         >
-                          UserAddress
-                        </th>
-                        <th
-                          scope="col"
-                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                        >
-                          Auditor's Signature
+                          Reason
                         </th>
                         <th
                           scope="col"
@@ -119,12 +113,11 @@ const WhiteListedContracts = () => {
                               {item.ContractAddress}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                              {item.CreatorAddress}
+                              {item.UserAddress}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                              {item.AuditorsSignature}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                              {item.reason}
                             </td>
-                          
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                               <a
                                 className="text-blue-500 hover:text-blue-700"
@@ -186,4 +179,4 @@ const WhiteListedContracts = () => {
   );
 };
 
-export default WhiteListedContracts;
+export default BlacklistedContracts;

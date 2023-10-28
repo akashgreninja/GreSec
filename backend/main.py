@@ -24,6 +24,10 @@ class BlacklistedContract(BaseModel):
     UserAddress: str
     reason: str
     Signature: str
+class WhiteListedContract(BaseModel):
+        ContractAddress: str
+        CreatorAddress: str
+        AuditorsSignature: str
 
 
 mongo_uri = os.getenv("MONGO_URI")
@@ -38,25 +42,31 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/blacklisted_contracts")
+# @app.api_route('/blacklisted_contracts', methods=['GET', 'HEAD'])
+@app.get("/blacklisted_contracts")
+async def get_blacklisted_contracts():
+    cursor = mongo.find("blacklisted_contracts")
+    blacklisted_contracts = [doc for doc in cursor]
+    return {"blacklisted_contracts": blacklisted_contracts}
+
+
+@app.post("/blacklist_contracts")
 async def blacklisted(contract: BlacklistedContract):
     print(contract)
 
     # Check if the signature is blacklisted
     signature = contract.Signature
-    count = mongo.count(where="blacklisted_signatures", query={"signature": signature})
-    if count > 0:
-        return {"message": "Blacklisted"}
+    # count = mongo.count_collection({"Signature": signature})
+    # if count > 0:
+    #     return {"message": "Blacklisted"}
 
     # Insert the contract into the blacklisted_contracts collection
     mongo.insert(where="blacklisted_contracts", data=contract.dict())
 
     # Check if the user has submitted more than 3 contracts with the same signature
     user = contract.UserAddress
-    count = mongo.count(
-        where="blacklisted_contracts",
-        query={"Signature": signature, "UserAddress": user},
-    )
+    count = mongo.count_collection({"Signature": signature, "UserAddress": user})
+    
     if count > 3:
         # Add the user to the blacklisted_users collection
         mongo.insert(where="blacklisted_users", data={"user": user})
@@ -66,9 +76,17 @@ async def blacklisted(contract: BlacklistedContract):
 
 
 @app.post("/whitelisted")
-async def blacklisted(contract: BlacklistedContract):
+async def blacklisted(contract: WhiteListedContract):
     mongo.insert(where="whitelisted_contracts", data=contract.dict())
-    return {"message": "Contract blacklisted"}
+    return {"message": "Contract Whitelisted"}
+
+
+@app.get("/whitelisted_contracts")
+async def get_whitelisted_contracts():
+    cursor = mongo.find("whitelisted_contracts")
+    blacklisted_contracts = [doc for doc in cursor]
+    return {"blacklisted_contracts": blacklisted_contracts}
+
 
 
 @app.post("/blacklisted_users")

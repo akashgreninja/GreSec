@@ -22,8 +22,14 @@ class Mongo:
         collection = getattr(self, where)
         collection.insert_one(data)
 
-
-    def find(self):
-        documents=self.blacklisted_contracts.find({})
+    def find(self,type):
+        collection = getattr(self, type)
+        projection = {"_id": 0}  # Exclude the _id field
+        documents = collection.find({}, projection)
         return documents
-  
+    def count_collection(self,query):
+        collection = getattr(self, "blacklisted_contracts")
+        print(collection)
+        count = collection.count_documents(query)
+        return count
+       

@@ -5,7 +5,7 @@ import image from "../../images/greninja.png";
 function App() {
   return (
     <>
-      <Navbar />
+   
       {/* <h1>Scam</h1> */}
       <div className=" h-screen w-screen flex flex-col  items-center">
         <img src={image} alt="" srcset="" width={400} />

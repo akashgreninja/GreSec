@@ -1,5 +1,6 @@
 import React from "react";
 import "../../App.css";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm">
@@ -59,38 +60,37 @@ const Navbar = () => {
             >
               Home
             </a>
-            <a
+            <Link to={"/Whitelisted_Contracts"}
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-              href="#"
+           
             >
               Whitelisted Contracts
-            </a>
-            <a
+            </Link>
+            <Link
+              to={"/Blacklisted_Contracts"}
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
               href="#"
             >
               Blacklisted Contracts
-            </a>
+            </Link>
             <a
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
               href="#"
             >
               Flagged Accounts
             </a>
-            <a
+            <Link
+              to={"/ReportContract"}
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-              href="#"
             >
               Report a Contract
-            </a>
+            </Link>
             <a
               class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
               href="#"
             >
               Audit your Contract?
             </a>
-
-            
 
             <a
               class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-l md:border-gray-300 md:my-6 md:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
