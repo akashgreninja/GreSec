@@ -98,9 +98,12 @@ async def blacklisted(contract):
 @app.get("/is_contract_blacklisted/{address}")
 async def is_contract_blacklisted(address: str):
     print("we here ")
-    documents = mongo.find()
+    print(address)
+    documents = mongo.find("blacklisted_contracts")
+    print(documents)
     for document in documents:
-        if document.get("address") == address:
+        print(document)
+        if document.get("ContractAddress") == address:
             tags = ["exploit", "heist"]
             return {"message": tags}
 
@@ -112,7 +115,7 @@ async def is_contract_blacklisted(address: str):
         return {"message": getscrapeddata}
 
     # If the address is not found, return False
-    return False
+    return {"message": False}
 
 
 if __name__ == "__main__":

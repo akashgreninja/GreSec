@@ -1,5 +1,5 @@
 import { createApiConfig } from "./config";
-import { REPORT_CONTRACT,GET_REPORTED_CONTRACTS,WHITE_REPORTED_CONTRACTS } from "./routes";
+import { REPORT_CONTRACT,GET_REPORTED_CONTRACTS,WHITE_REPORTED_CONTRACTS ,IS_CONTRACT_BLACKLISTED} from "./routes";
 
 const apiConfig = createApiConfig();
 
@@ -22,5 +22,16 @@ export const GetAllBlacklistedContracts = () => {
 export const GetAllWhiteContracts = () => {
  
   return apiConfig.get(WHITE_REPORTED_CONTRACTS);
+};
+
+export const ContractBlacklisted = (address) => {
+  console.log(address)
+  try {
+    return apiConfig.get(`${IS_CONTRACT_BLACKLISTED}/${address}`);
+  }catch(err){
+    console.log(err)
+  }
+ 
+
 };
 

@@ -26,6 +26,7 @@ class Mongo:
         collection = getattr(self, type)
         projection = {"_id": 0}  # Exclude the _id field
         documents = collection.find({}, projection)
+        print(documents)
         return documents
     def count_collection(self,query):
         collection = getattr(self, "blacklisted_contracts")

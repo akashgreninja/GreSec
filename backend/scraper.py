@@ -24,7 +24,7 @@ def Main(url):
             headers={"User-Agent": "Akash Greninja :)"},
         )
         soup = BeautifulSoup(r.content, "html.parser")
-        print(soup)
+    
         tags = soup.find_all("span", class_="hash-tag text-truncate")
 
         # Loop through the tags and print the text content
