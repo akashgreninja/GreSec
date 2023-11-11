@@ -3,6 +3,8 @@
 ## Project Status
 
 **This project is a work in progress.**
+**Won second Place in Ideathon conducted by IEDC BIT**
+
 
 We are actively developing and improving this project. While many features are already functional, there is more to come. We welcome contributions and feedback to help us make this project even better.
 
